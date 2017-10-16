@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div >
+      <a href="http://localhost:8082">首页</a>
+      <div >
+        <div>
+          <form action="?" method="post" enctype="multipart/form-data">
+            作者：<input type="text" name="author" /><br>
+            头像：<input type="file" name="f1" /><br>
+            标题：<input type="text" name="title" /><br>
+            时间：<input type="text" name="post_time" /><br>
+            内容：<textarea name="content"></textarea><br>
+            简介：<input type="text" name="summery" /><br>
+            点赞：<input type="text" name="n_like" /><br>
+            <input type="submit" value="添加"/>
+          </form>
+        </div>
+        <table border="1" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>作者</th>
+              <th>头像</th>
+              <th>标题</th>
+              <th>时间</th>
+              <th>内容</th>
+              <th>简介</th>
+              <th>点赞</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0;i<articles.length;i++){ %>
+            <tr>
+              <td><%=articles[i].ID%></td>
+              <td><%=articles[i].author%></td>
+              <td><img width="32" height="32" src="/upload/<%=articles[i].author_src%>"/></td>
+              <td><%=articles[i].title%></td>
+              <td><%=articles[i].post_time%></td>
+              <td><%=articles[i].content%></td>
+              <td><%=articles[i].summery%></td>
+              <td><%=articles[i].n_like%></td> 
+              <td>
+                <a href="?act=mod&id=<%=articles[i].ID%>">修改</a>
+                <a href="?act=del&id=<%=articles[i].ID%>" onclick="return confirm('你真的要删吗？')">删除</a>
+              </td>             
+            </tr>
+            <% } %>
+            
+          </tbody>
+        </table>
+         <% if(typeof mod_data!='undefined'){ %>
+        <div class="shadow"></div>
+        <div class="mod_dialog">
+          <form action="?" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="mod_id" value="<%= mod_data.ID %>" />
+            作者：<input type="text" name="author" value="<%= mod_data.author %>" /><br>
+            头像：<input type="file" name="f1"/><br>
+            标题：<input type="text" name="title" value="<%= mod_data.title %>" /><br>
+            时间：<input type="text" name="post_time" value="<%= mod_data.post_time %>" /><br>
+            内容：<textarea name="content"><%= mod_data.content %></textarea><br>
+            简介：<input type="text" name="summery" value="<%= mod_data.summery %>" /><br>
+            点赞：<input type="text" name="n_like" value="<%= mod_data.n_like %>" /><br>
+            <input type="submit" value="修改"/>
+            <a href="/custom">取消修改</a>
+          </form>
+        </div>
+        <% } %>
+       
+      </div>
+    </div>
+  </body>
+</html>

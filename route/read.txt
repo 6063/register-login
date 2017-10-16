@@ -1,0 +1,4 @@
+admin.js是管理员登录，这个密码用了加密
+common.js是普通用户注册登录操作
+custom.js是对文章进行管理，里面有图片的上传方法
+web/index.js是如果有前端的html页面来进行处理的，详细见important.txt

@@ -1,0 +1,157 @@
+前台可用的接口。
+admin相关都放在index.js里面，接口。
+web里面也建立一个index.js。
+第一步：
+在static文件夹下，建立登录，注册两个html
+第二步：在web下的index.js里面
+
+/get_yonghu
+[{ID,user,password}]
+router.get('/get_yonghu'(req,res){
+	db.query('select * from yonghu_table',(err,data)=>{
+		if(err){
+			res.status(500).send('database error').end();
+		}else{
+			res.send(data).end;
+		}
+	});
+});
+
+第三步：
+然后在static文件夹下的index.html，angular.module('app', [])后面没有符号
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>hello</title>
+	
+	<style type="text/css">
+		body{
+			background-image: url(image/chun.jpg);
+			width: 50px;
+			height: 50px;
+		};
+	</style>
+	<script src="js/angular.js" charset="utf-8"></script>
+	<script>
+		angular.module('app', [])
+
+		.controller('index', function ($scope, $http){
+			$http.get('/get_yonghu').then(function (res){
+					$scope.yonghu=res.data;
+				},
+				function (){
+					alert('获取数据失败');
+			});
+		});
+	</script>
+</head>
+<body ng-controller="index">
+
+	
+	<li><a href="login_register.html">注册</a></li>
+	<li><a href="login_user.html">登录</a></li>
+	hello
+
+	<div ng-repeat="item in yonghu">
+		<p>{{item.ID}}<p>
+		<p>{{item.user}}<p>
+		<p>{{item.password}}<p>		
+	</div>		
+</body>
+</html>
+
+
+
+
+
+
+
+/get_banners
+[{ID,title,description,href}]
+
+/get_custom_evaluatioin
+[{ID,title,description,src}]
+
+//get_aboutus
+[ID,title,content,pic_src,href]
+
+//get_msg[ID,name,email,phone,subject]
+
+//get_contact[ID,street,phone,fax,email,weibo,wx,map]
+
+//get_blog[ID,title,pic_src,pic_big_src,summary,content,post_time,author,n_view]
+
+//get_news[ID,title,summary,ico_src,big_pic_src,content]
+
+//get_intro[ID,title,description,href]
+
+然后做前台页面就在web文件夹下的index.html。
+
+  router.get('/get_custom_evaluations', (req, res)=>{
+    db.query('SELECT * FROM custom_evaluation_table', (err, data)=>{
+      if(err){
+        console.error(err);
+        res.status(500).send('database error').end();
+      }else{
+        res.send(data).end();
+      }
+    });
+  });
+
+然后在static文件夹下的index.html
+用angularjs进行修饰
+<html ng-app="app">
+<script>
+angular.module('app', [])
+
+.controller('index', function ($scope, $http){
+	$http.get('/get_banners').then(function (res){
+		$scope.banners=res.data;
+
+		for(var i=0;i<$scope.banners.length;i++){
+			$scope.banners[i].hide=true;
+		}
+		$scope.banners[0].hide=false;
+	}, function (){
+		alert('获取数据失败');
+	});
+
+	$http.get('/get_custom_evaluations').then(function (res){
+		$scope.customs=res.data;
+	}, function (){
+		alert('获取客户评价失败');
+	});
+});
+</script>
+
+<body ng-controller="index">
+
+
+
+
+
+
+在web下的index.js里面，
+router.get('/get_banners'(req,res){
+	db.query('select * from banner_table',(err,data)=>{
+		if(err){
+			res.status(500).send('database error').end();
+}else{
+	res.send(data).end;
+}
+})
+});
+
+
+
+然后访问localhost:8080/get_banners  会得到banner_table表的内容。
+
+
+然后在index.html里面的script里面，
+	$http.get('/get_custom_evaluations').then(function (res){
+		$scope.customs=res.data;
+	}, function (){
+		alert('获取客户评价失败');
+	});
+
+就可以了。

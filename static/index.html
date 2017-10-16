@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>hello</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<script type="application/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script language="JavaScript" src="js/bootstrap.min.js"></script>
+	<style type="text/css">
+		body{background-image: url(image/1.jpg); background-size:cover; no-repeat;};
+	</style>
+</head>
+<body>	
+
+	<div class="navbar navbar-default" >
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">首页</a>	 				
+			</div>
+			<ul class="nav nav-tabs">
+				<li><a href="http://localhost:8082/common/zhuce">用户注册</a></li>
+				<li><a href="http://localhost:8082/common/denglu">用户登录</a></li>	
+				<li><a href="http://localhost:8082/admin/login">管理员登录</a></li>	
+				<li><a href="login_user.html">登录（angularJS）</a></li>
+			</ul>
+	</div>	
+	   
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>hello</title>
+	
+	<style type="text/css">
+		body{
+			background-image: url(image/chun.jpg);
+			width: 50px;
+			height: 50px;
+		};
+	</style>
+	<script src="js/angular.js" charset="utf-8"></script>
+	<script>
+		angular.module('app', [])
+
+		.controller('index', function ($scope, $http){
+			$http.get('/get_yonghu').then(function (res){
+					$scope.yonghu=res.data;
+				},
+				function (){
+					alert('获取数据失败');
+			});
+		});
+	</script>
+</head>
+<body ng-controller="index">
+
+	
+	<li><a href="login_register.html">注册</a></li>
+	<li><a href="login_user.html">登录</a></li>
+	hello
+
+	<div ng-repeat="item in yonghu">
+		<p>{{item.ID}}<p>
+		<p>{{item.user}}<p>
+		<p>{{item.password}}<p>		
+	</div>		
+</body>
+</html> -->
+
